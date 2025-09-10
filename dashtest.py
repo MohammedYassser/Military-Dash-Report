@@ -2,7 +2,6 @@ import dash
 from dash import html, dcc, dash_table, Input, Output
 import dash_bootstrap_components as dbc
 import pandas as pd
-import pyodbc
 import os
 from dotenv import load_dotenv
 import pymssql
@@ -222,4 +221,5 @@ def update_table(emp_id, military_status, sort_col, sort_order):
 # ----------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8050)))
+
 
