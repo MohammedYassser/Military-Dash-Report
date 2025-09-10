@@ -5,6 +5,8 @@ import pandas as pd
 import pyodbc
 import os
 from dotenv import load_dotenv
+import pymssql
+
 
 # Load .env variables
 load_dotenv()
@@ -12,15 +14,13 @@ load_dotenv()
 # ----------------------------
 # Database connection function
 # ----------------------------
+
 def get_connection():
-    return pyodbc.connect(
-        f"DRIVER={os.getenv('DB_DRIVER')};"
-        f"SERVER={os.getenv('DB_SERVER')};"
-        f"DATABASE={os.getenv('DB_NAME')};"
-        f"UID={os.getenv('DB_USER')};"
-        f"PWD={os.getenv('DB_PASSWORD')};"
-        "Encrypt=yes;"
-        "TrustServerCertificate=yes;"
+    return pymssql.connect(
+        server=os.getenv("DB_SERVER"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
 
 # ----------------------------
@@ -222,3 +222,4 @@ def update_table(emp_id, military_status, sort_col, sort_order):
 # ----------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8050)))
+
